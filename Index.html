@@ -1,0 +1,181 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Holiday Movie Poster – Jay's Frames</title>
+<style>
+  :root{
+    --bg:#0b0b0d;--panel:#141419;--ink:#e9eef2;--muted:#9aa0a6;
+    --line:#23232b;--brand:#00d0b6;--accent:#f6b807;--good:#b9f3dd;--bad:#ff6b6b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,Segoe UI,Arial,sans-serif}
+  .wrap{max-width:1080px;margin:40px auto;padding:0 16px}
+  .hero{margin-bottom:18px}
+  .h1{font-size:28px;font-weight:900;margin:0}
+  .sub{color:var(--muted);margin:6px 0 0}
+  .grid{display:grid;gap:16px}
+  @media(min-width:960px){.grid{grid-template-columns:1.1fr .9fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .label{font-size:12px;color:var(--muted);margin-bottom:8px}
+  
+  .vibes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .vibe{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0f0f13;cursor:pointer;transition:.2s}
+  .vibe.active{outline:2px solid var(--brand);transform:translateY(-1px)}
+  .poster{position:relative;width:100%;height:180px;display:grid;place-items:center;background:linear-gradient(135deg,#20222a 0%,#101116 60%);color:#cfe9e6}
+  .poster:before{
+    content:"";position:absolute;inset:8px;border:1px solid #2a2a31;border-radius:10px;pointer-events:none
+  }
+  
+  .p-home{background:radial-gradient(60% 70% at 50% 40%, #244 0%, #111 65%)}
+  .p-elf{background:radial-gradient(70% 80% at 50% 55%, #1d3a2e 0%, #101116 75%)}
+  .p-vac{background:radial-gradient(70% 80% at 50% 55%, #3a2a1d 0%, #101116 75%)}
+  .poster .badge{position:absolute;top:10px;left:10px;font-size:11px;padding:4px 8px;border-radius:999px;background:#0d1412;border:1px solid #2a2a31;color:#9adacf}
+  .poster .title{font-weight:900;font-size:18px;letter-spacing:.5px;text-transform:uppercase}
+  .poster .cast{position:absolute;bottom:10px;left:10px;right:10px;color:#b2b6bd;font-size:11px;text-align:center;opacity:.8}
+  .vmeta{padding:10px 12px}
+  .vmeta h4{margin:0;font-size:14px;font-weight:800}
+  .vmeta p{margin:4px 0 0;color:var(--muted);font-size:12px}
+
+  .upload{border:1px dashed #3a3a44;border-radius:12px;padding:16px;text-align:center;background:#0f0f13}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:#15151b;border:1px solid #2a2a31;border-radius:10px;padding:10px 14px;color:var(--ink);font-weight:800;cursor:pointer}
+  .tiny{font-size:12px;color:var(--muted);margin-top:6px}
+  .thumb{margin:10px auto 0;width:72px;height:72px;border-radius:10px;border:1px solid #2a2a31;background:linear-gradient(135deg,#333,#111);display:grid;place-items:center;color:#9aa0a6}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+  .tier{border:1px solid var(--line);border-radius:12px;background:#0f0f13;padding:12px;cursor:pointer}
+  .tier.active{outline:2px solid var(--accent)}
+  .tier h4{margin:0 0 6px;font-size:14px}
+  .tier p{margin:0;color:var(--muted);font-size:12px}
+  .price{margin-top:8px;font-weight:900}
+
+  .row2{display:grid;gap:10px;margin-top:12px}
+  @media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+
+  input,textarea,select{
+    width:100%;background:#0f0f13;border:1px solid #2a2a31;border-radius:10px;color:var(--ink);
+    padding:10px 12px;font:14px/1.3 inherit
+  }
+
+  .total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#0f0f13}
+  .cta{width:100%;margin-top:12px;background:linear-gradient(90deg,var(--brand),#17e4c8);color:#041215;font-weight:900;border:0;border-radius:12px;padding:12px 16px;cursor:pointer}
+  .note{color:var(--muted);font-size:12px;margin-top:8px}
+  .divider{height:1px;background:var(--line);margin:14px 0}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <h1 class="h1">Your Family, Starring in a Holiday Classic</h1>
+      <p class="sub">Pick a vibe · Upload one photo · Choose finish · We handle the magic. Limited run this season.</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <div class="label">1) Pick your movie vibe</div>
+        <div class="vibes">
+          <div class="vibe active" aria-pressed="true">
+            <div class="poster p-home">
+              <div class="badge">Parody Art</div>
+              <div class="title">HOME (ALONE-ISH)</div>
+              <div class="cast">Kid screams center · parents peeking · cozy house motif</div>
+            </div>
+            <div class="vmeta">
+              <h4>Home Alone</h4>
+              <p>Funny family chaos energy</p>
+            </div>
+          </div>
+          <div class="vibe">
+            <div class="poster p-elf">
+              <div class="badge">Parody Art</div>
+              <div class="title">THE ELF VIBE</div>
+              <div class="cast">Tall elf silhouette · snowy skyline · candy cane accents</div>
+            </div>
+            <div class="vmeta">
+              <h4>Elf</h4>
+              <p>Wholesome + bright, kid-friendly</p>
+            </div>
+          </div>
+          <div class="vibe">
+            <div class="poster p-vac">
+              <div class="badge">Parody Art</div>
+              <div class="title">HOLIDAY CHAOS</div>
+              <div class="cast">Dad with lights · comic sparks · suburban roof hint</div>
+            </div>
+            <div class="vmeta">
+              <h4>Christmas Vacation</h4>
+              <p>Iconic dad-energy mayhem</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="label">2) Upload your main family photo</div>
+        <div class="upload">
+          <button class="btn">📤 Drag & drop or click to select</button>
+          <div class="tiny">JPG/PNG/WEBP/HEIC · up to 25MB · One photo is enough</div>
+          <div class="thumb">Preview</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="label">3) Choose your finish</div>
+        <div class="tiers">
+          <div class="tier active">
+            <h4>Digital Only</h4>
+            <p>High-res file for cards & socials</p>
+            <div class="price">$79</div>
+          </div>
+          <div class="tier">
+            <h4>Fine-Art Print</h4>
+            <p>Archival inkjet on museum paper</p>
+            <div class="price">$189</div>
+          </div>
+          <div class="tier">
+            <h4>Framed Edition</h4>
+            <p>Premium frame, ready to hang</p>
+            <div class="price">$399</div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <label>
+            <div class="label">Quantity</div>
+            <input type="number" min="1" value="1">
+          </label>
+          <label>
+            <div class="label">Notes (optional)</div>
+            <input placeholder="Pets to include? Wardrobe? Deadline?">
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">4) Checkout Details</div>
+        <div class="row2">
+          <label><div class="label">Full Name</div><input placeholder="Jane Doe"></label>
+          <label><div class="label">Email</div><input placeholder="you@example.com"></label>
+          <label><div class="label">Phone (optional)</div><input placeholder="(###) ###-####"></label>
+          <label><div class="label">Ship To (print/framed)</div><input placeholder="Street, City, State, ZIP"></label>
+        </div>
+
+        <div class="total">
+          <div>
+            <div style="font-weight:900">Order Total</div>
+            <div class="sub">Home Alone • digital • x1</div>
+          </div>
+          <div style="font-size:20px;font-weight:900">$79.00</div>
+        </div>
+
+        <button class="cta">Place Order</button>
+        <div class="note">We'll send a proof for approval before printing. Turnaround windows vary seasonally.</div>
+      </div>
+    </section>
+
+    <footer class="note" style="margin-top:16px">
+      © 2025 Jay's Frames — Hand-built parody poster art · archival printing · custom framing.
+    </footer>
+  </div>
+</body>
+</html>
