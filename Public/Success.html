@@ -1,0 +1,100 @@
+<!-- public/success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order Confirmed – Jay's Frames</title>
+<style>
+  :root{
+    --bg:#0b0b0d;--panel:#141419;--ink:#e9eef2;--muted:#9aa0a6;
+    --line:#23232b;--brand:#00d0b6;--good:#b9f3dd;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,Segoe UI,Arial,sans-serif;display:grid;place-items:center;min-height:100vh;padding:20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:40px;max-width:600px;text-align:center}
+  .icon{font-size:64px;margin-bottom:20px}
+  h1{font-size:28px;font-weight:900;margin:0 0 12px}
+  p{color:var(--muted);margin:8px 0;line-height:1.6}
+  .order-id{background:#0f0f13;border:1px solid var(--line);border-radius:8px;padding:12px;margin:20px 0;font-family:monospace;color:var(--good)}
+  .details{text-align:left;margin:24px 0;padding:20px;background:#0f0f13;border-radius:12px}
+  .details h3{margin:0 0 12px;font-size:14px;color:var(--muted)}
+  .details ul{list-style:none;padding:0;margin:0}
+  .details li{padding:8px 0;border-bottom:1px solid var(--line)}
+  .details li:last-child{border-bottom:none}
+  .btn{display:inline-block;margin-top:24px;padding:12px 24px;background:linear-gradient(90deg,var(--brand),#17e4c8);color:#041215;font-weight:900;border-radius:10px;text-decoration:none}
+  .note{font-size:12px;color:var(--muted);margin-top:24px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🎉</div>
+    <h1>Order Confirmed!</h1>
+    <p>Thank you for your order. We've received your payment and photo.</p>
+    
+    <div class="order-id" id="orderId">Loading order details...</div>
+    
+    <div class="details" id="orderDetails" style="display:none">
+      <h3>Order Details</h3>
+      <ul id="detailsList"></ul>
+    </div>
+    
+    <p>We'll send you a proof for approval within 3-5 business days.<br>Check your email for confirmation.</p>
+    
+    <a href="/" class="btn">Create Another Poster</a>
+    
+    <div class="note">Questions? Email us at support@jaysframes.com</div>
+  </div>
+
+  <script>
+    async function loadOrderDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+      
+      if (!sessionId) {
+        document.getElementById('orderId').textContent = 'No order found';
+        return;
+      }
+
+      try {
+        const response = await fetch(`/api/order/${sessionId}`);
+        if (!response.ok) throw new Error('Failed to load order');
+        
+        const data = await response.json();
+        const order = data.order;
+        
+        document.getElementById('orderId').textContent = `Order #${order.id.substring(0, 8).toUpperCase()}`;
+        
+        const vibeNames = {
+          homeAlone: 'Home Alone',
+          elf: 'Elf',
+          vacation: 'Christmas Vacation'
+        };
+        
+        const tierNames = {
+          digital: 'Digital Only',
+          print: 'Fine-Art Print',
+          framed: 'Framed Edition'
+        };
+        
+        const detailsList = document.getElementById('detailsList');
+        detailsList.innerHTML = `
+          <li><strong>Movie Vibe:</strong> ${vibeNames[order.vibe]}</li>
+          <li><strong>Product:</strong> ${tierNames[order.tier]}</li>
+          <li><strong>Quantity:</strong> ${order.quantity}</li>
+          <li><strong>Total:</strong> $${(order.amount / 100).toFixed(2)}</li>
+          <li><strong>Email:</strong> ${order.customerEmail}</li>
+        `;
+        
+        document.getElementById('orderDetails').style.display = 'block';
+        
+      } catch (error) {
+        console.error('Error loading order:', error);
+        document.getElementById('orderId').textContent = 'Error loading order details';
+      }
+    }
+    
+    loadOrderDetails();
+  </script>
+</body>
+</html>
